@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://uig.me/sitemap.xml
 Sitemap: https://uig.me/investigations/sitemap.xml
+Sitemap: https://uig.me/writing/sitemap.xml

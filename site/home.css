@@ -1,4 +1,4 @@
-/* uig.me home, /incidents/ and /about/. Loaded after style.css (shared header, footer and tokens). */
+/* uig.me home and /about/. Loaded after style.css (shared header, footer and tokens). */
 
 body.wide .wrap { max-width: 1080px; padding: 0 24px; }
 body.wide { font-size: 17px; line-height: 1.55; }
@@ -80,7 +80,7 @@ body.wide .site-footer { margin-top: 0; }
 .tiles .live-num { color: var(--accent); font-weight: 600; font-size: 15px; }
 .tiles .live-num:empty { display: none; }
 
-/* /incidents/ and /about/ */
+/* /about/ */
 .page-head { padding: 56px 0 8px; }
 .page-head h1 { font-size: clamp(2rem, 4.5vw, 2.75rem); line-height: 1.1; margin: 0 0 16px; font-weight: 750; }
 .page-head p { margin: 0; max-width: 720px; font-size: 1.1rem; color: var(--muted); }

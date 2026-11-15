@@ -3,11 +3,9 @@
 The home of **https://uig.me**: who I am, what I can do, and where the proof is.
 
 - `/` the home page, with a live "last hour on the honeypot" feed and one live number per project
-- `/incidents/` the list of incident reports and investigations (they live on the project sites)
 - `/about/` background, experience, certifications
-- `/notes/` longer write-ups
 
-The project sites: [honeypot](https://uig.me/honeypot), [detections](https://uig.me/detections),
+Everything I write is in its own repo, [writing](https://uig.me/writing). The project sites: [honeypot](https://uig.me/honeypot), [detections](https://uig.me/detections),
 [guide](https://uig.me/investigations), [lab](https://uig.me/labs).
 
 `site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `style.css` is the shared chrome and the notes; `home.css` styles the home, incidents and about pages.
