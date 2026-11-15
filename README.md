@@ -8,13 +8,13 @@ The one-page home at **https://uig.me**: who I am, and links to what I build, wi
 - [detections.uig.me](https://detections.uig.me) ([source](https://github.com/estul-lachin/uig-detections)):
   Sigma rules tested in CI, converted to Splunk SPL and Microsoft Sentinel KQL
 
-`site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `app.js` reads `https://lab.uig.me/summary.json`,
-`https://detections.uig.me/summary.json` and the honeypot's `stats.json`; if one fails, that card just shows no
-numbers. A Content-Security-Policy meta tag in `index.html` allows only those three origins for `fetch`, so a new
-data source must be added there too. `site/.well-known/` is published because the workflow sets
-`include-hidden-files`.
+`site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `app.js` fills one live number per project card from
+`https://detections.uig.me/summary.json`, `https://guide.uig.me/summary.json` and the honeypot's `stats.json` (in the
+`uig-honeypot-data` repo on raw.githubusercontent.com); if one fails, that card just shows no number. A
+Content-Security-Policy meta tag in `index.html` allows only those origins for `fetch`, so a new data source must be
+added there too. `site/.well-known/` is published because the workflow sets `include-hidden-files`.
 
-Local preview with fixtures: put a `summary.json`, a `detections.json` and a `stats.json` in `site/data/`, then
+Local preview with fixtures: put a `detections.json`, a `guide.json` and a `stats.json` in `site/data/`, then
 `python3 -m http.server -d site 8000` and open `http://127.0.0.1:8000/?local=1`.
 
 Link preview image: `site/og-image.png` (1200x630) is rendered from `assets/og-image.html` with Chrome:

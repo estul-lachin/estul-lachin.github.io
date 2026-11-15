@@ -1,13 +1,11 @@
-// uig.me: fills the live numbers from lab.uig.me/summary.json,
-// detections.uig.me/summary.json, guide.uig.me/summary.json and the honeypot's stats.json. If a feed
-// fails, that card's numbers are hidden; the page reads fine without them.
+// uig.me: one live number per project card, from detections.uig.me/summary.json, guide.uig.me/summary.json
+// and the honeypot's stats.json. If a feed fails, that card's number is hidden; the page reads fine without it.
 // Strings from the data are only ever set with textContent.
 "use strict";
 
 (function () {
   const params = new URLSearchParams(location.search);
   // ?local=1 reads fixtures from data/ for a local preview
-  const LAB = params.get("local") ? "data/summary.json" : "https://lab.uig.me/summary.json";
   const HP = params.get("local") ? "data/stats.json"
     : "https://raw.githubusercontent.com/estul-lachin/uig-honeypot-data/main/stats.json";
   const DET = params.get("local") ? "data/detections.json" : "https://detections.uig.me/summary.json";
@@ -18,73 +16,40 @@
     if (!r.ok) throw new Error(url + ": " + r.status);
     return r.json();
   });
-  // hide the numbers of the card that holds this element
+  // hide the number row of the card that holds this element
   const fail = (id) => (e) => {
     console.warn(e);
     $(id).closest(".nums").hidden = true;
   };
-
-  get(LAB).then((s) => {
-    $("labs-passed").textContent = fmt.format(s.labs_passed || 0);
-    $("labs-latest").textContent = s.latest_pass || "–";
-  }).catch(fail("labs-passed"));
-
-  get(DET).then((s) => {
-    $("det-rules").textContent = fmt.format(s.rules || 0);
-    $("det-tests").textContent = fmt.format((s.attack_test_events || 0) + (s.lookalike_test_events || 0));
-    // SOAR: shown only when the build could read Sentinel (detections' tools/soar_stats.py).
-    // Its numbers then take the big row, and the rule counts move into the detail line.
-    const so = s.soar;
-    if (so && so.incidents > 0) {
-      $("soar-incidents").textContent = fmt.format(so.incidents);
-      if (/^\d{4}-\d{2}-\d{2}$/.test(so.since || "")) {
-        $("soar-incidents-label").textContent = "incidents since " + new Date(so.since + "T00:00:00Z")
-          .toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
-      }
-      $("soar-enriched").textContent = (so.enriched_pct || 0) + "%";
-      if (Number.isFinite(so.enrich_seconds_median)) {
-        $("soar-enriched-label").textContent = "auto-enriched, ~" + so.enrich_seconds_median + " s";
-      }
-      $("soar-high").textContent = fmt.format(so.high_notified || 0) + "/" + fmt.format(so.high || 0);
-      $("det-counts").textContent = " (" + fmt.format(s.rules || 0) + " rules, " +
-        $("det-tests").textContent + " test events)";
-      $("det-soar-nums").hidden = false;
-      $("det-rule-nums").hidden = true;
-    }
-  }).catch(fail("det-rules"));
-
-  get(GUIDE).then((s) => {
-    $("guide-playbooks").textContent = fmt.format(s.playbooks || 0);
-    // owner's own work: shown only once there is some
-    if (s.incidents_closed_by_me > 0) {
-      $("guide-closed").textContent = fmt.format(s.incidents_closed_by_me);
-      $("guide-closed-box").hidden = false;
-    }
-    if (s.cases > 0) {
-      $("guide-cases").textContent = fmt.format(s.cases);
-      $("guide-cases-box").hidden = false;
-    }
-  }).catch(fail("guide-playbooks"));
+  const since = (day) => new Date(day + "T00:00:00Z")
+    .toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
 
   get(HP).then((s) => {
     $("hp-sessions").textContent = fmt.format(s.totals.sessions || 0);
-    $("hp-sources").textContent = fmt.format(s.totals.unique_sources || 0);
-    // say when counting started, e.g. "sessions since Nov 8"
     if (/^\d{4}-\d{2}-\d{2}$/.test(s.first_day || "")) {
-      const since = new Date(s.first_day + "T00:00:00Z")
-        .toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
-      $("hp-sessions-label").textContent = "sessions since " + since;
-    }
-    // the login techniques are in almost every session; show what comes after
-    const t = (s.ttps || []).find((x) => !/^T1078$|^T1110/.test(x.id));
-    if (t && /^T\d{4}(\.\d{3})?$/.test(t.id)) {
-      const a = $("hp-ttp-link");
-      a.href = "https://attack.mitre.org/techniques/" + t.id.replace(".", "/") + "/";
-      a.textContent = t.id + " " + t.name;
-      $("hp-ttp").hidden = false;
+      $("hp-sessions-label").textContent = "attack sessions since " + since(s.first_day);
     }
     if (s.generated_at) {
       $("updated").textContent = "Honeypot numbers as of " + s.generated_at.replace("T", " ").replace("Z", " UTC");
     }
   }).catch(fail("hp-sessions"));
+
+  // SOAR incidents when the detections build could read Sentinel (its tools/soar_stats.py), else the rule count
+  get(DET).then((s) => {
+    const so = s.soar;
+    if (so && so.incidents > 0) {
+      $("det-num").textContent = fmt.format(so.incidents);
+      $("det-label").textContent = "incidents auto-enriched"
+        + (/^\d{4}-\d{2}-\d{2}$/.test(so.since || "") ? " since " + since(so.since) : "");
+    } else if (s.rules) {
+      $("det-num").textContent = fmt.format(s.rules);
+    } else {
+      throw new Error("no numbers in " + DET);
+    }
+  }).catch(fail("det-num"));
+
+  get(GUIDE).then((s) => {
+    if (!s.playbooks) throw new Error("no playbooks in " + GUIDE);
+    $("guide-playbooks").textContent = fmt.format(s.playbooks);
+  }).catch(fail("guide-playbooks"));
 })();

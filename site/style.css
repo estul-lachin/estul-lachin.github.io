@@ -134,7 +134,7 @@ h3 a:hover { color: var(--accent); }
 .projects .card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
 .projects .card h3 a:focus-visible { outline: none; }
 .projects .card:has(h3 a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
-.projects .card .more a, .projects .card .top-ttp a { position: relative; z-index: 1; }
+.projects .card .more a { position: relative; z-index: 1; }
 .projects .card:hover h3 a { color: var(--accent); text-decoration: none; }
 .projects .card h3 a span { display: inline-block; transition: transform 0.15s; }
 .projects .card:hover h3 a span { transform: translateX(3px); }
@@ -151,10 +151,15 @@ h3 a:hover { color: var(--accent); }
   color: var(--accent);
 }
 .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-.card .top-ttp { font-size: 13px; }
 .card .more { margin-top: auto; margin-bottom: 0; font-size: 13px; }
 
-.contact p { color: var(--muted); }
+.featured {
+  margin: 28px 0 8px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: var(--radius); max-width: 760px;
+}
+.featured .kicker { font-size: 12px; color: var(--accent-2); margin: 0 0 6px; }
+.featured h2 { margin: 0 0 8px; font-size: 1.15rem; line-height: 1.4; border: 0; padding: 0; }
+.featured p:last-child { margin: 0; color: var(--muted); }
 
 /* long-form prose */
 .article > p:not(.meta):not(.kicker):not(.flow-label), .article li, .article .kv dd, .article .fields dd { font-family: var(--prose); font-size: 16px; line-height: 1.7; }
