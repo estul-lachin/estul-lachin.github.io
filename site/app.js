@@ -38,6 +38,7 @@
     if (e.kind === "connect") return place(e) + " connects on " + (e.proto === "telnet" ? "Telnet" : "SSH");
     if (e.kind === "login") return place(e) + (e.ok ? " logs in as " : " tries ") + text + (e.ok ? "" : ", refused");
     if (e.kind === "command") return place(e) + " runs: " + text;
+    if (e.kind === "download") return place(e) + " downloads " + text;
     return place(e) + ": " + (text || String(e.kind || "event"));
   }
 
@@ -45,7 +46,15 @@
     const evs = (r.events || []).filter((e) => e && Number.isFinite(e.t)).sort((a, b) => b.t - a.t);
     if (!evs.length) return;
     const feed = $("feed");
-    for (const e of evs.slice(0, FEED_ROWS)) {
+    // one row per place, newest first: one busy bot would otherwise fill the whole panel
+    const seen = new Set();
+    const rows = evs.filter((e) => {
+      const key = (e.cc || "?") + "|" + (e.city || "");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, FEED_ROWS);
+    for (const e of rows) {
       const li = document.createElement("li");
       const t = document.createElement("time");
       const d = new Date(e.t * 1000);
