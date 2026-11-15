@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Incident reports · Estul Lachin</title>
+<meta name="description" content="Incident reports and investigations by Estul Lachin, written from real attacks on his own honeypots.">
+<meta property="og:title" content="Incident reports · Estul Lachin">
+<meta property="og:description" content="Incident reports and investigations by Estul Lachin, written from real attacks on his own honeypots.">
+<meta property="og:url" content="https://uig.me/incidents/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://uig.me/incidents/">
+<meta property="og:image" content="https://uig.me/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Estul Lachin: labs, honeypot, detections">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/home.css">
+</head>
+<body class="wide">
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Estul Lachin</a>
+    <nav>
+      <a href="/#work">Work</a>
+      <a href="/incidents/" aria-current="page">Incident reports</a>
+      <a href="/about/">About</a>
+      <a href="/Estul-Lachin-Resume.pdf">Résumé</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Incident reports</h1>
+      <p>Each report is a real attack on one of my servers: what happened, how I know, and what I changed afterwards.</p>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
+      <a class="case" href="https://honeypot.uig.me/inc-001.html">
+        <div class="case-head"><span>INC-001</span><span>2026-11-14</span><span>Severity: Medium</span><span>Contained, under observation</span></div>
+        <div class="case-body">
+          <div class="case-main">
+            <h3>A botnet broke into my server and planted a cryptominer</h3>
+            <p>It guessed a password, came back two hours later and installed a miner. It never got administrator
+              rights and never reached the internet. A ten-minute read.</p>
+            <p class="go">Read the full report</p>
+          </div>
+          <dl>
+            <dt>How they got in</dt><dd>Weak SSH password</dd>
+            <dt>What they wanted</dt><dd>Cryptocurrency mining</dd>
+            <dt>What stopped them</dt><dd>Two layers of outbound blocking</dd>
+            <dt>What I missed</dt><dd>Four detection gaps, fixed the same night</dd>
+          </dl>
+        </div>
+      </a>
+      <h2 class="small spaced">More investigations</h2>
+      <div class="list">
+        <a href="https://guide.uig.me/cases/pboc-iot-botnet/"><time datetime="2026-11-15">2026-11-15</time><b>One script, 64 sources: an IoT botnet that marks its victims</b><span>Splunk</span></a>
+        <a href="https://guide.uig.me/cases/alert-then-login-triage/"><time datetime="2026-11-15">2026-11-15</time><b>An alert that turned out to be a window artifact, and how I disproved my own finding</b><span>Splunk</span></a>
+        <a href="/notes/telnet-dropper-incident/"><time datetime="2026-11-11">2026-11-11</time><b>A one-second Telnet dropper, traced from first packet to verdict</b><span>Sentinel · Splunk · Wazuh</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a href="mailto:hello@uig.me">hello@uig.me</a> ·
+    <a href="https://www.linkedin.com/in/estul-lachin">LinkedIn</a> ·
+    <a href="https://github.com/estul-lachin">GitHub</a> ·
+    <a href="https://github.com/estul-lachin/uig-home">Source</a>
+  </div>
+</footer>
+</body>
+</html>

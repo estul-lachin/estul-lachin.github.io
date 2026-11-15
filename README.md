@@ -1,20 +1,23 @@
 # uig-home
 
-The one-page home at **https://uig.me**: who I am, and links to what I build, with live numbers.
+The home of **https://uig.me**: who I am, what I can do, and where the proof is.
 
-- [lab.uig.me](https://lab.uig.me) ([source](https://github.com/estul-lachin/uig-lab)): hands-on Docker labs
-- [honeypot.uig.me](https://honeypot.uig.me) ([source](https://github.com/estul-lachin/uig-honeypot)): a live
-  Cowrie honeypot, weekly ATT&CK reports and Splunk detections
-- [detections.uig.me](https://detections.uig.me) ([source](https://github.com/estul-lachin/uig-detections)):
-  Sigma rules tested in CI, converted to Splunk SPL and Microsoft Sentinel KQL
+- `/` the home page, with a live "last hour on the honeypot" feed and one live number per project
+- `/incidents/` the list of incident reports and investigations (they live on the project sites)
+- `/about/` background, experience, certifications
+- `/notes/` longer write-ups
 
-`site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `app.js` fills one live number per project card from
+The project sites: [honeypot](https://honeypot.uig.me), [detections](https://detections.uig.me),
+[guide](https://guide.uig.me), [lab](https://lab.uig.me).
+
+`site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `style.css` is the shared chrome and the notes; `home.css` styles the home, incidents and about pages.
+`app.js` fills the feed from the honeypot's `recent.json` and one live number per project tile from
 `https://detections.uig.me/summary.json`, `https://guide.uig.me/summary.json` and the honeypot's `stats.json` (in the
 `uig-honeypot-data` repo on raw.githubusercontent.com); if one fails, that card just shows no number. A
 Content-Security-Policy meta tag in `index.html` allows only those origins for `fetch`, so a new data source must be
 added there too. `site/.well-known/` is published because the workflow sets `include-hidden-files`.
 
-Local preview with fixtures: put a `detections.json`, a `guide.json` and a `stats.json` in `site/data/`, then
+Local preview with fixtures: put a `recent.json`, a `stats.json`, a `detections.json` and a `guide.json` in `site/data/`, then
 `python3 -m http.server -d site 8000` and open `http://127.0.0.1:8000/?local=1`.
 
 Link preview image: `site/og-image.png` (1200x630) is rendered from `assets/og-image.html` with Chrome:

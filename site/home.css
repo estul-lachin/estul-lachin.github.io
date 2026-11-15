@@ -1,0 +1,112 @@
+/* uig.me home, /incidents/ and /about/. Loaded after style.css (shared header, footer and tokens). */
+
+body.wide .wrap { max-width: 1080px; padding: 0 24px; }
+body.wide { font-size: 17px; line-height: 1.55; }
+body.wide main { padding: 0; }
+body.wide h1, body.wide h2, body.wide h3 { letter-spacing: -0.02em; }
+body.wide .site-footer { margin-top: 0; }
+
+.band { padding: 64px 0; }
+.band.tint { background: var(--chip); }
+.band h2 { font-size: 2rem; line-height: 1.15; margin: 0 0 28px; font-weight: 700; }
+.kicker { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+
+/* hero */
+.hero { padding: 56px 0 64px; }
+.hero .wrap { display: flex; flex-wrap: wrap; gap: 48px 56px; align-items: center; }
+.hero-text { flex: 1 1 520px; display: flex; flex-direction: column; gap: 20px; }
+.hero h1 { font-size: clamp(2.2rem, 5vw, 3.375rem); line-height: 1.08; margin: 0; font-weight: 750; }
+.hero p { margin: 0; }
+.hero .lead { font-size: 1.15rem; color: var(--muted); }
+.hero .seeking { font-size: 1rem; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.button {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 8px;
+  background: var(--accent); border: 1.5px solid var(--accent); color: #fff; font-weight: 600;
+}
+.button:hover { text-decoration: none; background: #083f3b; border-color: #083f3b; }
+.button.secondary { background: transparent; color: var(--text); border-color: var(--text); }
+.button.secondary:hover { background: var(--chip); border-color: var(--text); }
+
+/* live panel */
+.live { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.panel { border: 1.5px solid var(--text); border-radius: 12px; overflow: hidden; }
+.panel-head { margin: 0; padding: 12px 20px; background: var(--text); color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; }
+.feed { list-style: none; margin: 0; padding: 0; font-size: 15px; min-height: 196px; }
+.feed li { display: flex; gap: 16px; padding: 12px 20px; border-top: 1px solid var(--border); }
+.feed li:first-child { border-top: 0; }
+.feed time { flex: 0 0 52px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.feed span { min-width: 0; overflow-wrap: anywhere; }
+.live .note { margin: 0; font-size: 15px; color: var(--muted); }
+
+/* day-one cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.cards article { background: var(--surface); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.cards h3 { margin: 0; font-size: 1.3rem; }
+.cards p { margin: 0; color: var(--muted); }
+.cards .proof { font-size: 15px; color: var(--text); margin-top: auto; }
+
+/* case card */
+.case { display: block; border: 1.5px solid var(--text); border-radius: 12px; overflow: hidden; color: var(--text); }
+.case:hover { text-decoration: none; box-shadow: var(--shadow); }
+.case-head { display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 14px 32px; background: var(--text); color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; }
+.case-body { display: flex; flex-wrap: wrap; gap: 32px 40px; padding: 32px; }
+.case-main { flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px; }
+.case-main h3 { margin: 0; font-size: 1.75rem; line-height: 1.2; }
+.case-main p { margin: 0; color: var(--muted); }
+.case-main .go { font-weight: 600; color: var(--accent); }
+.case:hover .go { text-decoration: underline; text-underline-offset: 3px; }
+.case dl { flex: 0 1 360px; margin: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px 16px; font-size: 15px; align-content: start; }
+.case dt { color: var(--muted); }
+.case dd { margin: 0; }
+.more-cases { margin: 20px 0 0; }
+
+/* story */
+.story .wrap { display: flex; flex-wrap: wrap; gap: 40px 56px; }
+.story-text { flex: 1 1 440px; }
+.story-text h2 { margin-bottom: 16px; }
+.story-text p { margin: 0 0 16px; color: var(--muted); }
+.years { flex: 1 1 380px; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 18px; align-self: center; }
+.years li { display: flex; gap: 20px; }
+.years b { flex: 0 0 104px; font-weight: 600; }
+
+/* work tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.tiles a { padding: 20px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 16px; display: flex; flex-direction: column; gap: 4px; }
+.tiles a:hover { text-decoration: none; border-color: var(--text); }
+.tiles strong { font-size: 1.05rem; }
+.tiles span { color: var(--muted); }
+.tiles .live-num { color: var(--accent); font-weight: 600; font-size: 15px; }
+.tiles .live-num:empty { display: none; }
+
+/* /incidents/ and /about/ */
+.page-head { padding: 56px 0 8px; }
+.page-head h1 { font-size: clamp(2rem, 4.5vw, 2.75rem); line-height: 1.1; margin: 0 0 16px; font-weight: 750; }
+.page-head p { margin: 0; max-width: 720px; font-size: 1.1rem; color: var(--muted); }
+.list { border: 1px solid var(--border); border-radius: 10px; margin-top: 20px; }
+.list a { display: flex; flex-wrap: wrap; gap: 6px 24px; padding: 20px 24px; color: var(--text); border-top: 1px solid var(--border); }
+.list a:first-child { border-top: 0; }
+.list a:hover { text-decoration: none; background: var(--chip); }
+.list time { flex: 0 0 104px; color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+.list b { flex: 1 1 400px; font-weight: 600; }
+.list span { color: var(--muted); font-size: 15px; }
+.band h2.small { font-size: 1.5rem; margin-bottom: 0; }
+.prose-wide > p:not(.actions) { max-width: 720px; }
+.prose-wide p { margin: 0 0 16px; }
+.plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.plain .when { display: block; font-size: 15px; color: var(--muted); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 56px; }
+.cols h2 { font-size: 1.5rem; margin-bottom: 16px; }
+
+@media (max-width: 640px) {
+  .band { padding: 44px 0; }
+  .hero { padding: 36px 0 44px; }
+  .case-head { padding: 12px 20px; }
+  .case-body { padding: 24px 20px; }
+  .case dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .case dd { margin-bottom: 10px; }
+  .years li { flex-direction: column; gap: 2px; }
+  .years b { flex: none; }
+}
+.band h2.spaced { margin-top: 56px; }

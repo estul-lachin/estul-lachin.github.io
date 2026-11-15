@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://detections.uig.me https://guide.uig.me https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Estul Lachin · Security operations &amp; IT support</title>
-<meta name="description" content="Estul Lachin, security operations and IT support in Edmonton, AB. Hands-on labs, a live SSH/Telnet honeypot and the detections built on it.">
-<meta property="og:title" content="Estul Lachin">
-<meta property="og:description" content="Security operations and IT support. Hands-on labs, a live honeypot and the detections built on it.">
+<title>Estul Lachin · SOC analyst, Edmonton</title>
+<meta name="description" content="Estul Lachin, SOC analyst in Edmonton, AB. I run decoy servers, detect what attackers do on them and investigate every case.">
+<meta property="og:title" content="Estul Lachin · SOC analyst, Edmonton">
+<meta property="og:description" content="Estul Lachin, SOC analyst in Edmonton, AB. I run decoy servers, detect what attackers do on them and investigate every case.">
 <meta property="og:url" content="https://uig.me/">
 <meta property="og:type" content="profile">
 <link rel="canonical" href="https://uig.me/">
@@ -17,11 +17,12 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Estul Lachin: labs, honeypot, detections">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css">
-<script defer src="app.js"></script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/home.css">
+<script defer src="/app.js"></script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "Person", "name": "Estul Lachin", "url": "https://uig.me/",
  "jobTitle": "Cybersecurity analyst",
@@ -30,106 +31,126 @@
  "sameAs": ["https://www.linkedin.com/in/estul-lachin", "https://github.com/estul-lachin", "https://www.credly.com/users/estul"]}
 </script>
 </head>
-<body>
+<body class="wide">
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="./" aria-current="page">Estul Lachin</a>
+    <a class="brand" href="/" aria-current="page">Estul Lachin</a>
     <nav>
-      <a href="https://lab.uig.me/">Labs</a>
-      <a href="https://honeypot.uig.me/">Honeypot</a>
-      <a href="https://detections.uig.me/">Detections</a>
-      <a href="https://guide.uig.me/">Guide</a>
+      <a href="/#work">Work</a>
+      <a href="/incidents/">Incident reports</a>
+      <a href="/about/">About</a>
+      <a href="/Estul-Lachin-Resume.pdf">Résumé</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main>
   <section class="hero">
-    <h1>Estul Lachin</h1>
-    <p class="role">Security operations &amp; IT support · Edmonton, AB</p>
-    <p class="seeking"><strong>Looking for</strong> a Tier 1 SOC analyst or other entry-level cybersecurity
-      role. Permanent Resident of Canada; Edmonton, remote, or open to relocation.</p>
-    <ul class="facts">
-      <li><strong>SOC analyst, Cydeo</strong> (remote, Apr 2026 – present): Tier 1 alert triage in Splunk ES and
-        IBM QRadar, phishing analysis, incident reports in Jira</li>
-      <li><strong>Freelance IT support</strong> (Sep 2022 – Mar 2026): three and a half years supporting small
-        businesses with remote user support, network troubleshooting, websites and cloud-hosted services</li>
-    </ul>
-    <ul class="certs" aria-label="Certifications">
-      <li><a href="https://www.credly.com/badges/0ad03319-76a9-4370-ad02-18248eb24f2d/public_url" rel="noopener" title="Verify on Credly">CompTIA Security+ <span class="verify">✓ verify</span></a></li>
-      <li><a href="https://www.credly.com/badges/922b8039-3667-49e6-b933-8e15fd46b0fe/public_url" rel="noopener" title="Verify on Credly">Google IT Support Professional Certificate <span class="verify">✓ verify</span></a></li>
-    </ul>
-    <p class="links">
-      <a class="button" href="Estul-Lachin-Resume.pdf" type="application/pdf">Résumé (PDF)</a>
-      <a class="button secondary" href="mailto:hello@uig.me">hello@uig.me</a>
-      <a class="button secondary" href="https://www.linkedin.com/in/estul-lachin">LinkedIn</a>
-      <a class="button secondary" href="https://github.com/estul-lachin">GitHub</a>
-    </p>
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="kicker">SOC analyst · Edmonton, AB</p>
+        <h1>I watch real attacks every day, and I write down what happened.</h1>
+        <p class="lead">I run two decoy servers on the internet. Attackers break in, my alerts catch them, and I
+          investigate each case the way a security operations team does. Everything on this site is that work.</p>
+        <p class="seeking">Looking for a Tier 1 SOC analyst role. Permanent Resident of Canada. Edmonton, remote,
+          or open to relocation.</p>
+        <p class="actions">
+          <a class="button" href="/Estul-Lachin-Resume.pdf" type="application/pdf">Résumé (PDF)</a>
+          <a class="button secondary" href="mailto:hello@uig.me">hello@uig.me</a>
+          <a class="button secondary" href="https://www.linkedin.com/in/estul-lachin">LinkedIn</a>
+        </p>
+      </div>
+      <div class="live" id="live" hidden>
+        <div class="panel">
+          <p class="panel-head">On my honeypot in the last hour</p>
+          <ol class="feed" id="feed" aria-live="off"></ol>
+        </div>
+        <p class="note"><span id="feed-note">Real traffic, published without IP addresses.</span>
+          <a href="https://honeypot.uig.me/">Watch it live</a></p>
+      </div>
+    </div>
   </section>
 
-  <section class="featured">
-    <p class="kicker">Start here · incident report, 2026-11-14</p>
-    <h2><a href="https://honeypot.uig.me/inc-001.html">INC-001: a botnet broke into my bait server and planted a
-      cryptominer</a></h2>
-    <p>A real intrusion on my Debian honeypot, from the first password guess to the verdict: what the attackers did,
-      what my detections caught and missed, and why no traffic got out.</p>
+  <section class="band tint">
+    <div class="wrap">
+      <h2>What I can do on day one</h2>
+      <div class="cards">
+        <article>
+          <h3>Triage alerts</h3>
+          <p>Decide whether an alert is a real threat, a false alarm, or expected, and write down why.</p>
+          <p class="proof"><strong>Proof:</strong> <a href="https://guide.uig.me/#incidents">my incident ledger in Microsoft Sentinel</a></p>
+        </article>
+        <article>
+          <h3>Investigate and report</h3>
+          <p>Follow an intrusion from the first login to the last command, then write a report a manager can act on.</p>
+          <p class="proof"><strong>Proof:</strong> <a href="/incidents/">my incident reports</a></p>
+        </article>
+        <article>
+          <h3>Write and test detections</h3>
+          <p>Turn attacker behaviour into alert rules for Splunk and Microsoft Sentinel, tested before they go live.</p>
+          <p class="proof"><strong>Proof:</strong> <a href="https://detections.uig.me/"><span id="det-rules">my</span> detection rules, each with test cases</a></p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <h2>What I build</h2>
-  <div class="projects">
-    <article class="card">
-      <p class="kicker">lab.uig.me</p>
-      <h3><a href="https://lab.uig.me/">Hands-on labs <span aria-hidden="true">→</span></a></h3>
-      <p class="lead">Every skill I learn, I practise in a lab that grades my work automatically.</p>
-      <p class="more"><a href="https://github.com/estul-lachin/uig-lab">Source</a></p>
-    </article>
+  <section class="band">
+    <div class="wrap">
+      <h2>Start with one case</h2>
+      <a class="case" href="https://honeypot.uig.me/inc-001.html">
+        <div class="case-head"><span>INC-001</span><span>2026-11-14</span><span>Severity: Medium</span><span>Contained, under observation</span></div>
+        <div class="case-body">
+          <div class="case-main">
+            <h3>A botnet broke into my server and planted a cryptominer</h3>
+            <p>It guessed a password, came back two hours later and installed a miner. It never got administrator
+              rights and never reached the internet. A ten-minute read.</p>
+            <p class="go">Read the full report</p>
+          </div>
+          <dl>
+            <dt>How they got in</dt><dd>Weak SSH password</dd>
+            <dt>What they wanted</dt><dd>Cryptocurrency mining</dd>
+            <dt>What stopped them</dt><dd>Two layers of outbound blocking</dd>
+            <dt>What I missed</dt><dd>Four detection gaps, fixed the same night</dd>
+          </dl>
+        </div>
+      </a>
+      <p class="more-cases"><a href="/incidents/">All incident reports</a></p>
+    </div>
+  </section>
 
-    <article class="card">
-      <p class="kicker">honeypot.uig.me</p>
-      <h3><a href="https://honeypot.uig.me/">Live SSH/Telnet honeypot <span aria-hidden="true">→</span></a></h3>
-      <p class="lead">A decoy server that real attackers break into every day, so I can see what they do.</p>
-      <div class="nums">
-        <div><span class="num" id="hp-sessions">–</span><span class="label" id="hp-sessions-label">attack sessions</span></div>
+  <section class="band tint story">
+    <div class="wrap">
+      <div class="story-text">
+        <h2>How I got here</h2>
+        <p>I trained as an engineer, then spent three and a half years as the only IT person for three small online
+          businesses: their users, their servers, their outages. Reading logs to find out what broke is what led me
+          to security.</p>
+        <p><a href="/about/">More about me</a></p>
       </div>
-      <p class="more"><a href="https://honeypot.uig.me/reports.html">Weekly reports</a> ·
-        <a href="https://github.com/estul-lachin/uig-honeypot">Source</a></p>
-    </article>
+      <ol class="years">
+        <li><b>2026 – now</b><span>SOC analyst, Cydeo · CompTIA Security+ · this site</span></li>
+        <li><b>2022 – 2026</b><span>Freelance IT support for three small businesses</span></li>
+        <li><b>2008 – 2012</b><span>Bachelor's degree in engineering, Jilin University</span></li>
+      </ol>
+    </div>
+  </section>
 
-    <article class="card">
-      <p class="kicker">detections.uig.me</p>
-      <h3><a href="https://detections.uig.me/">Detection-as-code <span aria-hidden="true">→</span></a></h3>
-      <p class="lead">Detects the honeypot's real attacks and triages them automatically, the way a SOC does.</p>
-      <div class="nums">
-        <div><span class="num" id="det-num">–</span><span class="label" id="det-label">detection rules tested in CI</span></div>
+  <section class="band" id="work">
+    <div class="wrap">
+      <h2>All the work, in one place</h2>
+      <div class="tiles">
+        <a href="https://honeypot.uig.me/"><strong>Honeypots</strong><span>Two decoy servers and what hits them, live</span><span class="live-num" id="hp-sessions"></span></a>
+        <a href="https://detections.uig.me/"><strong>Detections</strong><span>Alert rules and the automation behind them</span><span class="live-num" id="det-incidents"></span></a>
+        <a href="https://guide.uig.me/"><strong>Investigations</strong><span>Cases and playbooks in three SIEM tools</span><span class="live-num" id="guide-playbooks"></span></a>
+        <a href="https://lab.uig.me/"><strong>Practice labs</strong><span>Skills I drill, graded automatically</span></a>
       </div>
-      <p class="more"><a href="https://github.com/estul-lachin/uig-detections">Source</a></p>
-    </article>
-
-    <article class="card">
-      <p class="kicker">guide.uig.me</p>
-      <h3><a href="https://guide.uig.me/">SOC field guide <span aria-hidden="true">→</span></a></h3>
-      <p class="lead">Evidence that I work in Splunk, Microsoft Sentinel and Wazuh, on the honeypot's real data.</p>
-      <div class="nums">
-        <div><span class="num" id="guide-playbooks">–</span><span class="label">playbooks cross-checked in 3 SIEMs</span></div>
-      </div>
-      <p class="more"><a href="https://github.com/estul-lachin/uig-guide">Source</a></p>
-    </article>
-  </div>
-
-  <section class="notes">
-    <h2>Notes</h2>
-    <ul class="notes-list">
-      <li><a href="notes/telnet-dropper-incident/">A one-second Telnet dropper, traced in Sentinel, Splunk and Wazuh</a>
-        <span class="meta">· 2026-11-11</span></li>
-      <li><a href="notes/custom-domain-email/">Email on my own domain, with SPF, DKIM and DMARC passing</a>
-        <span class="meta">· 2026-11-11</span></li>
-    </ul>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <a href="mailto:hello@uig.me">Email</a> ·
+    <a href="mailto:hello@uig.me">hello@uig.me</a> ·
     <a href="https://www.linkedin.com/in/estul-lachin">LinkedIn</a> ·
     <a href="https://github.com/estul-lachin">GitHub</a> ·
     <a href="https://github.com/estul-lachin/uig-home">Source</a>

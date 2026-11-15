@@ -1,55 +1,85 @@
-// uig.me: one live number per project card, from detections.uig.me/summary.json, guide.uig.me/summary.json
-// and the honeypot's stats.json. If a feed fails, that card's number is hidden; the page reads fine without it.
-// Strings from the data are only ever set with textContent.
+// uig.me home: the "last hour" feed and one live number per work tile, from the honeypot's recent.json and
+// stats.json, detections.uig.me/summary.json and guide.uig.me/summary.json. Anything that fails to load is
+// left out; the page reads fine without it. Strings from the data are attacker-controlled: they are only
+// ever set with textContent.
 "use strict";
 
 (function () {
-  const params = new URLSearchParams(location.search);
-  // ?local=1 reads fixtures from data/ for a local preview
-  const HP = params.get("local") ? "data/stats.json"
-    : "https://raw.githubusercontent.com/estul-lachin/uig-honeypot-data/main/stats.json";
-  const DET = params.get("local") ? "data/detections.json" : "https://detections.uig.me/summary.json";
-  const GUIDE = params.get("local") ? "data/guide.json" : "https://guide.uig.me/summary.json";
+  const local = new URLSearchParams(location.search).get("local"); // ?local=1 reads fixtures from data/
+  const HP = local ? "data/" : "https://raw.githubusercontent.com/estul-lachin/uig-honeypot-data/main/";
+  const DET = local ? "data/detections.json" : "https://detections.uig.me/summary.json";
+  const GUIDE = local ? "data/guide.json" : "https://guide.uig.me/summary.json";
+  const FEED_ROWS = 4;
   const fmt = new Intl.NumberFormat("en");
   const $ = (id) => document.getElementById(id);
   const get = (url) => fetch(url, { cache: "no-cache" }).then((r) => {
     if (!r.ok) throw new Error(url + ": " + r.status);
     return r.json();
   });
-  // hide the number row of the card that holds this element
-  const fail = (id) => (e) => {
-    console.warn(e);
-    $(id).closest(".nums").hidden = true;
-  };
-  const since = (day) => new Date(day + "T00:00:00Z")
-    .toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
+  const warn = (e) => console.warn(e);
+  const day = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en", { month: "short", day: "numeric", timeZone: "UTC" });
+  const isDay = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d || "");
+  const region = (() => {
+    try { const n = new Intl.DisplayNames(["en"], { type: "region" }); return (cc) => n.of(cc); }
+    catch (e) { return (cc) => cc; }
+  })();
+  const clip = (s, n) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
 
-  get(HP).then((s) => {
-    $("hp-sessions").textContent = fmt.format(s.totals.sessions || 0);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(s.first_day || "")) {
-      $("hp-sessions-label").textContent = "attack sessions since " + since(s.first_day);
+  function place(e) {
+    if (!e.cc) return "An unknown source";
+    let name = e.cc;
+    try { name = region(e.cc) || e.cc; } catch (err) { /* not a region code */ }
+    return e.city ? e.city + ", " + e.cc : name;
+  }
+
+  // one plain sentence per event
+  function sentence(e) {
+    const text = clip(String(e.text || "").replace(/\s+/g, " ").trim(), 60);
+    if (e.kind === "connect") return place(e) + " connects on " + (e.proto === "telnet" ? "Telnet" : "SSH");
+    if (e.kind === "login") return place(e) + (e.ok ? " logs in as " : " tries ") + text + (e.ok ? "" : ", refused");
+    if (e.kind === "command") return place(e) + " runs: " + text;
+    return place(e) + ": " + (text || String(e.kind || "event"));
+  }
+
+  get(HP + "recent.json").then((r) => {
+    const evs = (r.events || []).filter((e) => e && Number.isFinite(e.t)).sort((a, b) => b.t - a.t);
+    if (!evs.length) return;
+    const feed = $("feed");
+    for (const e of evs.slice(0, FEED_ROWS)) {
+      const li = document.createElement("li");
+      const t = document.createElement("time");
+      const d = new Date(e.t * 1000);
+      t.dateTime = d.toISOString();
+      t.textContent = d.toISOString().slice(11, 16);
+      const s = document.createElement("span");
+      s.textContent = sentence(e);
+      li.append(t, s);
+      feed.appendChild(li);
     }
+    $("feed-note").textContent = fmt.format(evs.length) + " events in the last hour (times in UTC), published without IP addresses.";
+    $("live").hidden = false;
+  }).catch(warn);
+
+  get(HP + "stats.json").then((s) => {
+    $("hp-sessions").textContent = fmt.format(s.totals.sessions || 0) + " attack sessions"
+      + (isDay(s.first_day) ? " since " + day(s.first_day) : "");
     if (s.generated_at) {
       $("updated").textContent = "Honeypot numbers as of " + s.generated_at.replace("T", " ").replace("Z", " UTC");
     }
-  }).catch(fail("hp-sessions"));
+  }).catch(warn);
 
-  // SOAR incidents when the detections build could read Sentinel (its tools/soar_stats.py), else the rule count
   get(DET).then((s) => {
+    if (s.rules) $("det-rules").textContent = fmt.format(s.rules);
     const so = s.soar;
     if (so && so.incidents > 0) {
-      $("det-num").textContent = fmt.format(so.incidents);
-      $("det-label").textContent = "incidents auto-enriched"
-        + (/^\d{4}-\d{2}-\d{2}$/.test(so.since || "") ? " since " + since(so.since) : "");
+      $("det-incidents").textContent = fmt.format(so.incidents) + " incidents auto-enriched"
+        + (isDay(so.since) ? " since " + day(so.since) : "");
     } else if (s.rules) {
-      $("det-num").textContent = fmt.format(s.rules);
-    } else {
-      throw new Error("no numbers in " + DET);
+      $("det-incidents").textContent = fmt.format(s.rules) + " rules tested in CI";
     }
-  }).catch(fail("det-num"));
+  }).catch(warn);
 
   get(GUIDE).then((s) => {
-    if (!s.playbooks) throw new Error("no playbooks in " + GUIDE);
-    $("guide-playbooks").textContent = fmt.format(s.playbooks);
-  }).catch(fail("guide-playbooks"));
+    if (s.playbooks) $("guide-playbooks").textContent = fmt.format(s.playbooks) + " playbooks cross-checked";
+  }).catch(warn);
 })();
