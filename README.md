@@ -7,12 +7,12 @@ The home of **https://uig.me**: who I am, what I can do, and where the proof is.
 - `/about/` background, experience, certifications
 - `/notes/` longer write-ups
 
-The project sites: [honeypot](https://honeypot.uig.me), [detections](https://detections.uig.me),
-[guide](https://guide.uig.me), [lab](https://lab.uig.me).
+The project sites: [honeypot](https://uig.me/honeypot), [detections](https://uig.me/detections),
+[guide](https://uig.me/investigations), [lab](https://uig.me/labs).
 
 `site/` is plain HTML, CSS and JS, deployed by GitHub Pages. `style.css` is the shared chrome and the notes; `home.css` styles the home, incidents and about pages.
 `app.js` fills the feed from the honeypot's `recent.json` and one live number per project tile from
-`https://detections.uig.me/summary.json`, `https://guide.uig.me/summary.json` and the honeypot's `stats.json` (in the
+`https://uig.me/detections/summary.json`, `https://uig.me/investigations/summary.json` and the honeypot's `stats.json` (in the
 `uig-honeypot-data` repo on raw.githubusercontent.com); if one fails, that card just shows no number. A
 Content-Security-Policy meta tag in `index.html` allows only those origins for `fetch`, so a new data source must be
 added there too. `site/.well-known/` is published because the workflow sets `include-hidden-files`.

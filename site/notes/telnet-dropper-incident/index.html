@@ -38,7 +38,7 @@
   <h1>Incident report: a one-second Telnet dropper</h1>
   <p class="meta"><time datetime="2026-11-11">11 November 2026</time> · about 15 minutes · updated 13 November: <a href="#other-siems">the same incident in Splunk and Wazuh</a></p>
 
-  <p>This is a write-up of one real attack on my <a href="https://honeypot.uig.me/">honeypot</a>, done the way
+  <p>This is a write-up of one real attack on my <a href="/honeypot/">honeypot</a>, done the way
     I would hand it to the next shift: what happened, how it was detected, what the automation did, what I
     concluded and what I would do about it. The attack itself is ordinary, and that is why I picked it. Most of
     a SOC's day is ordinary attacks, and the work is in confirming them quickly and in noticing what the
@@ -136,7 +136,7 @@ rm -rf telnet2.sh                                             <span class="c"># 
 
   <h2>What the detections did</h2>
   <p>The rules are Sigma, converted to KQL and run hourly in Sentinel
-    (<a href="https://detections.uig.me/">detections.uig.me</a>). Each raises one alert per source IP.</p>
+    (<a href="/detections/">uig.me/detections</a>). Each raises one alert per source IP.</p>
   <div class="table-wrap">
   <table>
     <thead><tr><th>Incident</th><th>Rule</th><th>Sensor</th><th>Severity</th><th>SOAR outcome</th></tr></thead>
@@ -296,7 +296,7 @@ rm -rf telnet2.sh                                             <span class="c"># 
 
   <h2 id="other-siems">The same incident in Splunk and Wazuh (13 November)</h2>
   <p>Sentinel is the SIEM I run live. I also keep a local Splunk and a local Wazuh on my Mac, loaded with the
-    pseudonymized copy of the same rows that <a href="https://guide.uig.me/">guide.uig.me</a> uses: source
+    pseudonymized copy of the same rows that <a href="/investigations/">uig.me/investigations</a> uses: source
     addresses become <code>src-</code> plus eight hex digits, and addresses inside commands become
     <code>[ip]</code>. I worked the session again in each one from the start: find it, rebuild the timeline,
     see what the detections caught, and repeat the pivots.</p>

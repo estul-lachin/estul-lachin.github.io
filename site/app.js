@@ -1,5 +1,5 @@
 // uig.me home: the "last hour" feed and one live number per work tile, from the honeypot's recent.json and
-// stats.json, detections.uig.me/summary.json and guide.uig.me/summary.json. Anything that fails to load is
+// stats.json, uig.me/detections/summary.json and uig.me/investigations/summary.json. Anything that fails to load is
 // left out; the page reads fine without it. Strings from the data are attacker-controlled: they are only
 // ever set with textContent.
 "use strict";
@@ -7,8 +7,8 @@
 (function () {
   const local = new URLSearchParams(location.search).get("local"); // ?local=1 reads fixtures from data/
   const HP = local ? "data/" : "https://raw.githubusercontent.com/estul-lachin/uig-honeypot-data/main/";
-  const DET = local ? "data/detections.json" : "https://detections.uig.me/summary.json";
-  const GUIDE = local ? "data/guide.json" : "https://guide.uig.me/summary.json";
+  const DET = local ? "data/detections.json" : "/detections/summary.json";
+  const GUIDE = local ? "data/guide.json" : "/investigations/summary.json";
   const FEED_ROWS = 4;
   const fmt = new Intl.NumberFormat("en");
   const $ = (id) => document.getElementById(id);
