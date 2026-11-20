@@ -96,7 +96,24 @@
 
   <section class="band">
     <div class="wrap">
-      <h2>Start with one case</h2>
+      <h2>Incident reports</h2>
+      <a class="case" href="/writing/inc-002/">
+        <div class="case-head"><span>INC-002</span><span>2026-11-16</span><span>Severity: Medium</span><span>Final report · 2026-11-20</span></div>
+        <div class="case-body">
+          <div class="case-main">
+            <h3>A second botnet kicked out the first and took over my server</h3>
+            <p>It guessed the new password, killed the first group's miner and tried to reach 509 machines inside my
+              network. It never got administrator rights and nothing got out. A six-minute read.</p>
+            <p class="go">Read the full report</p>
+          </div>
+          <dl>
+            <dt>How they got in</dt><dd>Weak SSH password</dd>
+            <dt>What they wanted</dt><dd>Crypto mining, and a base to attack others</dd>
+            <dt>What stopped them</dt><dd>No sudo rights and outbound blocking</dd>
+            <dt>What I missed</dt><dd>Scan attempts blocked on the victim, fixed the same day</dd>
+          </dl>
+        </div>
+      </a>
       <a class="case" href="/writing/inc-001/">
         <div class="case-head"><span>INC-001</span><span>2026-11-14</span><span>Severity: Medium</span><span>Final report · updated 2026-11-16</span></div>
         <div class="case-body">

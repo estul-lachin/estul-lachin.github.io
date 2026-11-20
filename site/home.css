@@ -50,6 +50,7 @@ body.wide .site-footer { margin-top: 0; }
 /* case card */
 .case { display: block; border: 1.5px solid var(--text); border-radius: 12px; overflow: hidden; color: var(--text); }
 .case:hover { text-decoration: none; box-shadow: var(--shadow); }
+.case + .case { margin-top: 20px; }
 .case-head { display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 14px 32px; background: var(--text); color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; }
 .case-body { display: flex; flex-wrap: wrap; gap: 32px 40px; padding: 32px; }
 .case-main { flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px; }
